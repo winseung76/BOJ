@@ -35,7 +35,7 @@ public class n01744 {
 
 		i = 0;
 		while (i < nn.size()) {
-			if (i + 1 < nn.size() && nn.get(i) != 1 && nn.get(i + 1) != 1)
+			if (i + 1 < nn.size())
 				sum += nn.get(i++) * nn.get(i++);
 			else
 				sum += nn.get(i++);

@@ -9,26 +9,26 @@ public class n01541 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String str = br.readLine();
-		String[] front, back = null;
+		String[] arr = br.readLine().split("-"); // arr[0] =  "55"  arr[1] = "50+40" -> "90"
 
-		int idx = str.indexOf('-');
-		if (idx > -1) {
-			front = str.substring(0, idx).split("\\+");
-			back = str.substring(idx + 1).replace("+", "-").split("\\-");
-		} else
-			front = str.split("\\+");
+		for (int i = 0; i < arr.length; i++) {
 
-		for (int i = 0; i < front.length; i++) {
-			res += Integer.parseInt(front[i]);
-		}
-		if (back != null) {
-			for (int i = 0; i < back.length; i++) {
-				res -= Integer.parseInt(back[i]);
+			if (arr[i].contains("+")) {
+				int sum = 0;
+				String[] num = arr[i].split("\\+");
+				for (int j = 0; j < num.length; j++) {
+					sum += Integer.parseInt(num[j]);
+				}
+				arr[i] = String.valueOf(sum);
 			}
 		}
 
+		int res = Integer.parseInt(arr[0]);
+		for (int i = 1; i < arr.length; i++)
+			res -= Integer.parseInt(arr[i]);
+
 		bw.write(res + "\n");
 		bw.flush();
+
 	}
 }
