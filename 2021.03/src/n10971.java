@@ -25,17 +25,16 @@ public class n10971 {
 		}
 
 		visited[1] = true;
-		dfs(1, 1, 0);
+		dfs(1, 1, 1, 0);
 
 		bw.write(min + "\n");
 		bw.flush();
 
 	}
 
-	public static void dfs(int start, int now, int cost) {
+	public static void dfs(int start, int now, int cnt, int cost) {
 
 		if (now == start && cost > 0) {
-
 			min = Math.min(min, cost);
 			return;
 		}
@@ -44,25 +43,16 @@ public class n10971 {
 
 			if (w[now][n] > 0) {
 
-				if (n == start) {
-					boolean flag = true;
-					for (int i = 1; i <= N; i++) {
-						if (!visited[i]) {
-							flag = false;
-							break;
-						}
-					}
-					if (flag) {
-						cost += w[now][n];
-						dfs(start, n, cost);
-					}
+				if (n == start && cnt == N) {
+					cost += w[now][n];
+					dfs(start, n, cnt + 1, cost);
 				}
 
 				else if (!visited[n]) {
 					visited[n] = true;
 					cost += w[now][n];
 
-					dfs(start, n, cost);
+					dfs(start, n, cnt + 1, cost);
 
 					cost -= w[now][n];
 					visited[n] = false;
