@@ -26,9 +26,7 @@ public class n02293 {
 			for (int j = 1; j <= k; j++) {
 				if (j >= coin[i])
 					dp[j] += dp[j - coin[i]];
-				System.out.print(dp[j] + " ");
 			}
-			System.out.println();
 		}
 
 		bw.write(dp[k] + "\n");
