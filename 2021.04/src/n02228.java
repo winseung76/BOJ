@@ -21,12 +21,12 @@ public class n02228 {
 
 		for (int i = 1; i <= N; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
-			sum[i] = sum[i - 1] + arr[i];
+			sum[i] = sum[i - 1] + arr[i]; // 누적합 구하기
 		}
 
-		for (int i = 0; i <= N; i++) {
-			for (int j = 1; j <= M; j++) {
-				dp[i][j] = Integer.MIN_VALUE / 2;
+		for (int n = 0; n <= N; n++) {
+			for (int m = 1; m <= M; m++) {
+				dp[n][m] = Integer.MIN_VALUE / 2;
 			}
 		}
 
@@ -35,7 +35,7 @@ public class n02228 {
 		for (int n = 2; n <= N; n++) {
 			for (int m = 1; m <= M; m++) {
 
-				dp[n][m] = dp[n - 1][m];
+				dp[n][m] = dp[n - 1][m]; // n번째 수가 구간에 포함안되는 경우
 
 				int min = 0;
 				if (m == 1)
