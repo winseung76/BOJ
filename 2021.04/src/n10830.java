@@ -73,5 +73,4 @@ public class n10830 {
 
 		return tmp;
 	}
-
 }
