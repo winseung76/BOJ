@@ -14,27 +14,18 @@ public class n01016 {
 		min = Long.parseLong(input[0]);
 		max = Long.parseLong(input[1]);
 
-		/*
-		 * for (int i = 2; i <= 1000000; i++) prime[i] = true;
-		 * 
-		 * for (int i = 2; i * i <= 1000000; i++) { if (prime[i]) { for (int k = 2; i *
-		 * k <= 1000000; k++) { prime[i * k] = false; } } }
-		 */
-
 		boolean[] check = new boolean[(int) (max - min + 1)];
 
 		for (long i = 2; i <= Math.sqrt(max); i++) {
-			// if (prime[i]) {
+
 			long square = i * i;
 			double t = (double) min / (double) square;
 			long start = (long) ((Math.ceil(t) * square) - min);
 
-			//System.out.println(check.length + " " + start);
 			for (long j = start; j < check.length; j += square) {
-				// System.out.println(j);
+
 				check[(int) j] = true;
 			}
-			// }
 		}
 
 		long cnt = 0;
