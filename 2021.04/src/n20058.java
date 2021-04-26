@@ -62,60 +62,45 @@ public class n20058 {
 
 			int n = (int) Math.pow(2, l);
 
-			int[][][] tmp = new int[4][n / 2][n / 2];
-
-			int idx = 0;
 			for (int r = 0; r < size; r += n) {
 				for (int c = 0; c < size; c += n) {
 
+					int[][] tmp = new int[n][n];
+
 					int nr = 0;
-					for (int j = c; j < c + n / 2; j++) {
+					for (int j = c; j < c + n; j++) {
 						int nc = 0;
-						for (int i = r + n / 2 - 1; i >= r; i--) {
-							tmp[idx][nr][nc++] = A[i][j];
+						for (int i = r + n - 1; i >= r; i--) {
+							tmp[nr][nc++] = A[i][j];
 						}
 						nr++;
 					}
-				}
-				idx++;
-			}
 
-			idx = 0;
-
-			for (int r = 0; r < size; r += n) {
-				for (int c = 0; c < size; c += n) {
-
-					int nr = 0;
-					for (int i = r; i < r + n / 2; i++) {
+					nr = 0;
+					for (int i = r; i < r + n; i++) {
 						int nc = 0;
-						for (int j = c; j < c + n / 2; j++) {
-							A[i][j] = tmp[idx][nr][nc++];
+						for (int j = c; j < c + n; j++) {
+							A[i][j] = tmp[nr][nc++];
 						}
 						nr++;
 					}
-				}
-				idx++;
-			}
 
-			System.out.println("before : ");
-			for (int r = 0; r < size; r++) {
-				for (int c = 0; c < size; c++) {
-					System.out.print(A[r][c] + " ");
 				}
-				System.out.println();
-			}
-			System.out.println();
 
+			}
+			
 			reduceIce();
-
-			System.out.println("after : ");
-			for (int r = 0; r < size; r++) {
-				for (int c = 0; c < size; c++) {
-					System.out.print(A[r][c] + " ");
-				}
-				System.out.println();
-			}
-			System.out.println();
+			/*
+			 * System.out.println("before : "); for (int r = 0; r < size; r++) { for (int c
+			 * = 0; c < size; c++) { System.out.print(A[r][c] + " "); }
+			 * System.out.println(); } System.out.println();
+			 * 
+			 * reduceIce();
+			 * 
+			 * System.out.println("after : "); for (int r = 0; r < size; r++) { for (int c =
+			 * 0; c < size; c++) { System.out.print(A[r][c] + " "); } System.out.println();
+			 * } System.out.println();
+			 */
 		}
 	}
 
