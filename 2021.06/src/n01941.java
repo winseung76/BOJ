@@ -3,6 +3,7 @@ import java.util.*;
 
 public class n01941 {
 
+	static List<Pos> poses = new ArrayList<>();
 	static char[][] board = new char[5][5];
 	static boolean[][] visited = new boolean[5][5];
 	static int cnt;
@@ -20,35 +21,31 @@ public class n01941 {
 			}
 		}
 
-		solve(new ArrayList<>(), 0, 0);
+		solve(new ArrayList<>(), 0, 0, 0, -1);
 
 		bw.write(cnt + "\n");
 		bw.flush();
 
 	}
 
-	public static void solve(List<Pos> list, int s, int y) {
+	public static void solve(List<Pos> list, int s, int y, int r, int c) {
 
-		if (list.size() == 7) {
+		if (s + y == 7 && s >= 4) {
 			boolean res = bfs(list);
-			if (tmp == 0) {
-				for (Pos p : list) {
-					System.out.println(p.r + " " + p.c);
-				}
-				System.out.println(res);
-				System.out.println();
-			}
 
-			// System.out.println(res);
 			if (res) {
+
 				cnt++;
 			}
 			tmp++;
 			return;
 		}
 
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
+		for (int i = r; i < 5; i++) {
+			int j = 0;
+			if (i == r)
+				j = c + 1;
+			for (; j < 5; j++) {
 
 				if (!visited[i][j]) {
 
@@ -57,9 +54,9 @@ public class n01941 {
 					list.add(pos);
 
 					if (board[i][j] == 'S')
-						solve(list, s + 1, y);
+						solve(list, s + 1, y, i, j);
 					else if (y < 3)
-						solve(list, s, y + 1);
+						solve(list, s, y + 1, i, j);
 
 					list.remove(pos);
 					visited[i][j] = false;
@@ -73,11 +70,6 @@ public class n01941 {
 		Queue<Pos> q = new LinkedList<>();
 		boolean[][] check = new boolean[5][5];
 
-		/*
-		 * for (Pos p : list) { System.out.println(p.r + " " + p.c); }
-		 * System.out.println();
-		 * 
-		 */
 		Pos start = list.get(0);
 		check[start.r][start.c] = true;
 		q.offer(start);
@@ -88,7 +80,6 @@ public class n01941 {
 
 			for (Pos p : list) {
 				if (!check[p.r][p.c] && Math.abs(p.r - pos.r) + Math.abs(p.c - pos.c) == 1) {
-					// System.out.println(np.r + " " + np.c + " " + check[np.r][np.c]);
 					q.offer(p);
 					check[p.r][p.c] = true;
 				}
